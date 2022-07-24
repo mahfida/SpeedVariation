@@ -3,6 +3,7 @@
 % missing entries in residual computation
 % type: a selector for modifying class of Z_bar to that of Z, 
 % e.g. for cp_opt, it changes class of Z_bar from'ktensor' to 'tensor'
+
 function [node_residual, node_leverage] = ResidualLeverage_OutliersNAN(Z,W_nan, Z_bar,type)
 
     Z=double(Z);
@@ -34,7 +35,7 @@ function [node_residual, node_leverage] = ResidualLeverage_OutliersNAN(Z,W_nan, 
         leverage_cutoff_huber_relaxed= 0.5;
         
         % Cut-off
-        residual_cutoff_2xSTD = std(scaled_residuals)*3;
+        residual_cutoff_3xSTD = std(scaled_residuals)*3;
         residuals_standard_deviation = std(scaled_residuals);
        
 
@@ -45,7 +46,7 @@ function [node_residual, node_leverage] = ResidualLeverage_OutliersNAN(Z,W_nan, 
         set(gca, 'FontSize', 20);
         xlabel('Leverage score','FontSize',20); 
         ylabel('Normalized residual','FontSize',20); 
-        yline(residual_cutoff_2xSTD,'-',{'Residual','Cut-off'},'LineWidth',2,'Color','red','LineStyle','--','FontSize',14)
+        yline(residual_cutoff_3xSTD,'-',{'Residual','Cut-off'},'LineWidth',2,'Color','red','LineStyle','--','FontSize',14)
         xline(leverage_cutoff_huber_relaxed,'-', {'Leverage','Cutoff'},'LineWidth',2,'Color','red','LineStyle','--','FontSize',14)
         
     
